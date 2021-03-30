@@ -1,4 +1,5 @@
-const createStatementData = require("./createStatementData");
+// statement.js
+const createStatementData = require("./chapter1-2-createStatementData.js");
 const invoices = require("./invoices.json");
 const plays = require("./plays.json");
 
@@ -6,9 +7,8 @@ function statement(invoice, plays) {
   return renderPlainText(createStatementData(invoice, plays));
 }
 
-function renderPlainText(data, plays) {
+function renderPlainText(data) {
   let result = `청구 내역 (고객명: ${data.customer})\n`;
-  // for문 on
   for (let perf of data.performances) {
     // 청구 내역을 출력한다.
     result += `  ${perf.play.name}: ${usd(perf.amount / 100)} (${
@@ -50,4 +50,6 @@ function usd(aNumber) {
   }).format(aNumber / 100);
 }
 
+const invoices = require("./invoices.json");
+const plays = require("./plays.json");
 console.log(statement(invoices, plays));
